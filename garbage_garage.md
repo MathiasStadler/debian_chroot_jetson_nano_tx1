@@ -1,9 +1,7 @@
-# FROM HERE
+# garbage garage
+<!-- ktf -->
+- armbian archive  [![alt text][1]](https://rsync.armbian.com/oldarchive/jetson-nano/archive/)
 
-- How to Execute Commands in a Chroot Environment and Switch User to Run Scripts in Bash [![alt text][1]](https://linuxvox.com/blog/bash-executing-commands-from-within-a-chroot-and-switch-user/)
-<!-- ktf -->
-- Latest image on webpage [![alt text][1]]( https://rsync.armbian.com/oldarchive/jetson-nano/archive/Armbian_23.8.1_Jetson-nano_bookworm_current_6.1.50_xfce_desktop.img.xz)
-<!-- ktf -->
 <!-- To comply with the format -->
 <!-- Link sign - Don't Found a better way :-( - You know a better method? - send me a email -->
 >[!NOTE]
