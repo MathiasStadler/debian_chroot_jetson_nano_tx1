@@ -60,17 +60,34 @@ zram0  252:0    0   1.9G  0 disk [SWAP]
 zram1  252:1    0    50M  0 disk /var/log
 ```
 <!-- ktf -->
+- create a mount point
+<!-- ktf -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+# -p, --parents     no error if existing, make parent directories as needed,
+#                    with their file modes unaffected by any -m option
+mkdir -p /mnt/mychroot
+```
+<!-- ktf -->
 - mount disk/partition
 <!-- ktf -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
 # as root
-mount /dev/sdb1 /mnt/mychroot
+# mount first the partition with root folder
+mount /dev/sdb2 /mnt/mychroot
 # check it is mounted already
 ls -la /mnt/mychroot
-# output skip
+# mount efi in our case /dev/sdb1 on /boot/efi
+mount /dev/sdb1 /mnt/mychroot/boot/efi
 ```
 <!-- ktf -->
-- mount
+- check grub installation [![alt text][1]](https://www.bleepingcomputer.com/forums/t/740193/how-to-repair-or-re-install-grub-using-the-chroot-command/)
+<!-- ktf -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+#grub-install --recheck <device>
+grub-install --recheck /dev/sdb
+```
+<!-- ktf -->
+- mount system folder
 <!-- ktf -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
 sudo mount -t proc /proc /mnt/mychroot/proc
@@ -79,7 +96,46 @@ sudo mount --bind /dev /mnt/mychroot/dev
 sudo mount --bind /dev/pts /mnt/mychroot/dev/pts
 ```
 <!-- ktf -->
-- next point
+- change to chroot
+<!-- ktf -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+cd /mnt
+chroot mychroot
+```
+<!-- ktf -->
+>[!NOTE]
+> In case of follow error
+> => mount: /mnt/mychroot: special device /dev/sdb2 does not exist
+> The another disk/stick/what ever is not already mounted
+<!-- ktf -->
+## Fix netplan error [![alt text][1]](https://computingforgeeks.com/how-to-manage-ubuntu-debian-networking-using-netplan/)
+<!-- ktf -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+ [   12.949175] (sd-execut[272]: /usr/lib/systemd/system-generators/netplan fail.
+```
+
+- Fix netpaln.io error [![alt text][1]](https://docs.armbian.com/User-Guide_Networking/)
+
+- set follow file copy to /etc/netpaln and run ``` sudo netplan apply ``` 
+
+<!-- ktf -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    all-eth-interfaces:
+      match:
+        name: "e*"
+      dhcp4: yes
+      dhcp6: yes
+      ipv6-privacy: yes
+```
+
+/etc/machine-id
+
+
+<!-- ktf -->
 <!-- To comply with the format -->
 <!-- Link sign - Don't Found a better way :-( - You know a better method? - send me a email -->
 >[!NOTE]
