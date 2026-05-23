@@ -1,8 +1,19 @@
 {
     "cSpell.words": [
         "armbian",
+        "ethernets",
+        "execut",
+        "Jetson",
+        "MOUNTPOINT",
         "mychroot",
+        "netpaln",
         "netplan",
-        "vfat"
+        "networkd",
+        "oflag",
+        "sysfs",
+        "trapapa",
+        "unxz",
+        "vfat",
+        "zram"
     ]
 }

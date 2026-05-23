@@ -116,7 +116,7 @@ chroot mychroot
 
 - Fix netpaln.io error [![alt text][1]](https://docs.armbian.com/User-Guide_Networking/)
 
-- set follow file copy to /etc/netpaln and run ``` sudo netplan apply ``` 
+- set follow file copy to /etc/netpaln and run ``` sudo netplan apply ```
 
 <!-- ktf -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
@@ -133,7 +133,6 @@ network:
 ```
 
 /etc/machine-id
-
 
 <!-- ktf -->
 <!-- To comply with the format -->
