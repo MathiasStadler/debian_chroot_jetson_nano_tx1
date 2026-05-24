@@ -90,10 +90,21 @@ grub-install --recheck /dev/sdb
 - mount system folder
 <!-- ktf -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
+# usb device must plug in :-)
+# see available device
+lsblk
+mount /dev/sdb2 /mnt/mychroot
+#mount boot partition
+mount /dev/sdb1 /mnt/mychroot/boot/efi
 sudo mount -t proc /proc /mnt/mychroot/proc
 sudo mount -t sysfs /sys /mnt/mychroot/sys
 sudo mount --bind /dev /mnt/mychroot/dev
 sudo mount --bind /dev/pts /mnt/mychroot/dev/pts
+# boot via systemd-nopawn
+systemd-nspawn -D /mnt/mychroot --boot
+# shutdown 
+sudo shutdown --halt
+# Container mychroot has been shut down
 ```
 <!-- ktf -->
 - change to chroot
@@ -101,7 +112,15 @@ sudo mount --bind /dev/pts /mnt/mychroot/dev/pts
 ```bash <!-- markdownlint-disable-line code-block-style -->
 cd /mnt
 chroot mychroot
+# test with lsblk
+# / and /boot/efi must mounted of usb device
 ```
+
+ls -la /etc/systemd/system/display-manager.service
+lrwxrwxrwx 1 root root 35 Jul 10  2023 /etc/systemd/system/display-manager.service -> /lib/systemd/system/lightdm.service
+
+ln -sf /dev/null /etc/systemd/system/display-manager.service
+
 <!-- ktf -->
 >[!NOTE]
 > In case of follow error
