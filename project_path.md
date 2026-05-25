@@ -107,6 +107,14 @@ sudo shutdown --halt
 # Container mychroot has been shut down
 ```
 <!-- ktf -->
+- change to rescue.target
+<!-- ktf -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+systemd-nspawn --directory /mnt/mychroot --boot  -- --unit rescue.target
+## multi-user.target
+systemd-nspawn --directory /mnt/mychroot --boot  -- --unit multi-user.target
+```
+<!-- ktf -->
 - change to chroot
 <!-- ktf -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
